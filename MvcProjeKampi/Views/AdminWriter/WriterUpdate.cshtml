@@ -1,0 +1,33 @@
+﻿@model EntityLayer.Concrete.Writer
+@{
+    ViewBag.Title = "WriterUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("WriterUpdate", "AdminWriter", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Id")
+        @Html.TextBoxFor(w => w.WriterId, new { @class = "form-control"})
+        <br />
+        @Html.Label("Yazar Adı")
+        @Html.TextBoxFor(w => w.WriterName, new { @class = "form-control" })
+        <br />
+        @Html.Label("Yazar Soyadı")
+        @Html.TextBoxFor(w => w.WriterSurname, new { @class = "form-control" })
+        <br />
+        @Html.Label("Yazar Hakkında")
+        @Html.TextBoxFor(w => w.WriterAbout, new { @class = "form-control" })
+        <br />
+        @Html.Label("Yazar Resmi")
+        <input type="file" name="WriterImage" />
+        <br />
+        @Html.Label("Yazar Mail")
+        @Html.TextBoxFor(w => w.WriterMail, new { @class = "form-control" })
+        <br />
+        @Html.Label("Yazar Şifre")
+        @Html.TextBoxFor(w => w.WriterPassaword, new { @class = "form-control" })
+
+    </div>
+    <button class="btn btn-info">Güncelle</button>
+}

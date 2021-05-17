@@ -1,0 +1,61 @@
+﻿@using EntityLayer.Concrete
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Writer>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .pagination-container{text-align:center}
+</style>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<a href="/AdminWriter/WriterAdd" class="btn btn-primary mb-3">Yazar Ekle</a>
+
+<div class="card card-solid">
+    <div class="card-body pb-0">
+        <div class="row d-flex align-items-stretch">
+            @foreach (var writer in Model)
+            {
+                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                    <div class="card bg-light">
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-7 pt-3">
+                                    <h2 class="lead"><b>@writer.WriterName @writer.WriterSurname</b></h2>
+                                    <p class="text-muted text-sm"><b>Hakkında: </b>@writer.WriterAbout</p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-mail-bulk"></i></span>@writer.WriterMail</li>
+                                    </ul>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <img src="/Content/AdminPanel/dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                                <a href="/AdminWriter/WriterDelete/@writer.WriterId" class="btn btn-danger btn-sm">
+                                    Sil
+                                </a>
+                                <a href="/AdminWriter/WriterUpdate/@writer.WriterId" class="btn btn-sm btn-warning">
+                                    Düzenle
+                                </a>
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    Yazıları
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
